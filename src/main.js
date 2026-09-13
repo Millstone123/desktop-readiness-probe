@@ -2,6 +2,8 @@ import { execFile } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
 import process from 'node:process';
 
+const version = '1.1.0';
+
 export function loadConfiguration(raw) {
   let parsed;
   try {
@@ -39,10 +41,14 @@ export async function main(options = {}) {
 }
 
 if (process.argv[1] && import.meta.url === new URL(`file://${process.argv[1]}`).href) {
-  main().then((bundleId) => {
+  if (process.argv.includes('--version')) {
+    console.log(version);
+  } else {
+    main().then((bundleId) => {
     console.log(`Desktop application ready: ${bundleId}`);
-  }).catch((error) => {
-    console.error(error.message);
-    process.exitCode = 1;
-  });
+    }).catch((error) => {
+      console.error(error.message);
+      process.exitCode = 1;
+    });
+  }
 }

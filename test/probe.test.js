@@ -29,6 +29,15 @@ test('main reads and validates the project configuration', async () => {
   assert.deepEqual(calls, [['/usr/bin/open', '-b', 'com.apple.calculator']]);
 });
 
+test('reports the package version', async () => {
+  const run = (await import('node:child_process')).execFile;
+  await new Promise((resolve, reject) => {
+    run(process.execPath, [new URL('../src/main.js', import.meta.url).pathname, '--version'], (error, stdout) => {
+      if (error) reject(error); else resolve(stdout);
+    });
+  }).then((stdout) => assert.equal(stdout.trim(), '1.1.0'));
+});
+
 test('invalid bundle identifiers are rejected before launch', () => {
   assert.throws(() => loadConfiguration('{"targetBundleId":"bad bundle","launchTimeoutMilliseconds":5}'), /bundle identifier/);
 });
