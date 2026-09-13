@@ -9,7 +9,7 @@ npm install
 npm run setup
 ```
 
-The setup command reads `probe.config.json` and asks LaunchServices to open the configured bundle. The default target is a standard macOS desktop application; edit `targetBundleId` to probe the application used by your own test environment.
+The setup command reads `probe.config.json` and asks LaunchServices to open the configured bundle. Edit `targetBundleId` to probe the application used by your own test environment.
 
 ## Tests
 
@@ -21,14 +21,7 @@ The tests exercise configuration validation and the LaunchServices invocation wi
 
 ## Configuration
 
-```json
-{
-  "targetBundleId": "com.apple.calculator",
-  "launchTimeoutMilliseconds": 5000
-}
-```
-
-- `targetBundleId` — macOS bundle identifier to open through `/usr/bin/open`.
+- `targetBundleId` — macOS bundle identifier to open through `/usr/bin/open`; the default is defined in `probe.config.json`.
 - `launchTimeoutMilliseconds` — maximum time to wait for the launch request.
 
 ## License
