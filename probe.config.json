@@ -1,0 +1,4 @@
+{
+  "targetBundleId": "com.apple.calculator",
+  "launchTimeoutMilliseconds": 5000
+}
